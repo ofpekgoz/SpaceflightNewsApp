@@ -2,12 +2,15 @@ package com.omerfpekgoz.spaceflightnewsapp.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.omerfpekgoz.spaceflightnewsapp.R
 import com.omerfpekgoz.spaceflightnewsapp.databinding.ItemArticleBinding
 import com.omerfpekgoz.spaceflightnewsapp.domain.model.ArticleEntity
+import com.omerfpekgoz.spaceflightnewsapp.util.CustomFilter
 import com.omerfpekgoz.spaceflightnewsapp.util.Util
 
 /**
@@ -15,9 +18,9 @@ import com.omerfpekgoz.spaceflightnewsapp.util.Util
  */
 class ArticleListAdapter(
     var onItemClicked: ((id: Int) -> Unit)? = null,
-) : RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
-
-    private var articleList = arrayListOf<ArticleEntity>()
+) : RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>(), Filterable {
+    var filter: CustomFilter? = null
+    var articleList = arrayListOf<ArticleEntity>()
 
     fun submitList(list: List<ArticleEntity>) {
         this.articleList.clear()
@@ -57,5 +60,12 @@ class ArticleListAdapter(
     }
 
     inner class ArticleViewHolder(val itemArticleBinding: ItemArticleBinding) : RecyclerView.ViewHolder(itemArticleBinding.root)
+
+    override fun getFilter(): Filter {
+        if (filter == null) {
+            filter = CustomFilter(articleList as ArrayList<ArticleEntity>, this)
+        }
+        return filter as CustomFilter
+    }
 
 }
