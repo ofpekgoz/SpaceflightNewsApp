@@ -14,7 +14,6 @@
 - Retrofit2
 - Glide
 
- <img src="https://github.com/ofpekgoz/SpaceflightNewsApp/blob/main/screenshot/Screenshot_20240513_153435.png" height="500">
- <img src="https://github.com/ofpekgoz/SpaceflightNewsApp/blob/main/screenshot/Screenshot_20240513_153435.png" height="500">
- <img src="https://github.com/ofpekgoz/SpaceflightNewsApp/blob/main/screenshot/Screenshot_20240513_153435.png" height="500">
- <img src="https://github.com/ofpekgoz/SpaceflightNewsApp/blob/main/screenshot/Screenshot_20240513_153435.png" height="500">
+ <img src="https://github.com/ofpekgoz/SpaceflightNewsApp/blob/main/screenshot/Screenshot_20240513_153435.png" height="500"> <img src="https://github.com/ofpekgoz/SpaceflightNewsApp/blob/main/screenshot/Screenshot_20240513_153603.png" height="500"> <img src="https://github.com/ofpekgoz/SpaceflightNewsApp/blob/main/screenshot/Screenshot_20240513_153629.png" height="500">
+<img src="https://github.com/ofpekgoz/SpaceflightNewsApp/blob/main/screenshot/Screenshot_20240513_153503.png" height="500">
+
