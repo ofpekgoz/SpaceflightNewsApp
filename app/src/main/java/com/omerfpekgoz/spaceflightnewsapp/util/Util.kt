@@ -5,6 +5,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities.TRANSPORT_CELLULAR
 import android.net.NetworkCapabilities.TRANSPORT_ETHERNET
 import android.net.NetworkCapabilities.TRANSPORT_WIFI
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * Created by omerfarukpekgoz on 11.05.2024.
@@ -22,5 +24,13 @@ object Util {
             capabilities.hasTransport(TRANSPORT_ETHERNET) -> true
             else -> false
         }
+    }
+
+    fun formatDateTime(dateTime: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+
+        val date = inputFormat.parse(dateTime)
+        return outputFormat.format(date)
     }
 }

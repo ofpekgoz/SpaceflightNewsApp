@@ -9,7 +9,6 @@ import retrofit2.http.Path
  * Created by omerfarukpekgoz on 11.05.2024.
  */
 interface ArticleAPI {
-
     @GET("articles")
     suspend fun getArticleList(): ArticleListDTO
 

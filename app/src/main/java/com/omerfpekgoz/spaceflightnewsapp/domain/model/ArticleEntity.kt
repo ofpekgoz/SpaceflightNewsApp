@@ -2,6 +2,7 @@ package com.omerfpekgoz.spaceflightnewsapp.domain.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.omerfpekgoz.spaceflightnewsapp.data.model.Result
 
 /**
  * Created by omerfarukpekgoz on 11.05.2024.
@@ -16,8 +17,15 @@ data class ArticleEntity(
     val url: String
 
 
-) {
-    override fun toString(): String {
-        return "id=$id, title='$title')"
-    }
+)
+
+fun ArticleEntity.toFavoriteArticleEntity(): FavoriteArticle {
+    return FavoriteArticle(
+        id = id,
+        title = title,
+        summary = summary,
+        published_at = published_at,
+        image_url = image_url,
+        url = url
+    )
 }

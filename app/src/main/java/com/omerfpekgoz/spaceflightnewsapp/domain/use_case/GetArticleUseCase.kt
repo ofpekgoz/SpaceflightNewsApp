@@ -1,6 +1,5 @@
 package com.omerfpekgoz.spaceflightnewsapp.domain.use_case
 
-import android.util.Log
 import com.omerfpekgoz.spaceflightnewsapp.domain.model.FavoriteArticle
 import com.omerfpekgoz.spaceflightnewsapp.domain.repository.ArticleRepository
 import com.omerfpekgoz.spaceflightnewsapp.util.Resource
@@ -28,9 +27,7 @@ class GetArticleUseCase @Inject constructor(
     fun getArticleById(id: Int, forceFetchFromRemote: Boolean) = flow {
         emit(Resource.Loading)
         try {
-            Log.e("ARTICLE", "Use Case 1 $id")
             val article = articleRepository.getArticleById(id, forceFetchFromRemote)
-            Log.e("ARTICLE", "Use Case $article")
             emit(Resource.Success(article))
         } catch (e: Exception) {
             emit(Resource.Error(e.message))
@@ -49,11 +46,7 @@ class GetArticleUseCase @Inject constructor(
         }
     }
 
-    suspend fun insertFavoriteArticle(favoriteArticle: FavoriteArticle) {
-        articleRepository.insertFavoriteArticle(favoriteArticle)
-    }
-
-    suspend fun deleteFavoriteArticle(id: Int) {
-        articleRepository.deleteFavoriteArticle(id)
+    suspend fun isArticleInFavorites(id: Int): FavoriteArticle? {
+        return articleRepository.isArticleInFavorites(id)
     }
 }

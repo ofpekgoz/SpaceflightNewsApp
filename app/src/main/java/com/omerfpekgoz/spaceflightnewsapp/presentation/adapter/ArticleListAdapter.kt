@@ -8,12 +8,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.omerfpekgoz.spaceflightnewsapp.R
 import com.omerfpekgoz.spaceflightnewsapp.databinding.ItemArticleBinding
 import com.omerfpekgoz.spaceflightnewsapp.domain.model.ArticleEntity
+import com.omerfpekgoz.spaceflightnewsapp.util.Util
 
 /**
  * Created by omerfarukpekgoz on 11.05.2024.
  */
 class ArticleListAdapter(
-    var onItemClicked: ((id:Int) -> Unit)? = null,
+    var onItemClicked: ((id: Int) -> Unit)? = null,
 ) : RecyclerView.Adapter<ArticleListAdapter.ArticleViewHolder>() {
 
     private var articleList = arrayListOf<ArticleEntity>()
@@ -36,7 +37,7 @@ class ArticleListAdapter(
             with(article) {
                 txtTitle.text = title
                 txtSummary.text = summary
-                txtPublishedAt.text = published_at
+                txtPublishedAt.text = Util.formatDateTime(published_at)
 
                 Glide.with(holder.itemView.context)
                     .load(image_url)
@@ -56,6 +57,5 @@ class ArticleListAdapter(
     }
 
     inner class ArticleViewHolder(val itemArticleBinding: ItemArticleBinding) : RecyclerView.ViewHolder(itemArticleBinding.root)
-
 
 }

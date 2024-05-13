@@ -1,5 +1,6 @@
 package com.omerfpekgoz.spaceflightnewsapp.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,7 +23,7 @@ class ArticleDetailViewModel @Inject constructor(
     private var _articleDetailState = MutableLiveData<Resource<*>>()
     val articleDetailState = _articleDetailState
 
-    fun getArticleList(id: Int, forceFetchFromRemote: Boolean) {
+    fun getArticleById(id: Int, forceFetchFromRemote: Boolean) {
         viewModelScope.launch {
             getArticleUseCase.getArticleById(id, forceFetchFromRemote).onEach {
                 when (it) {

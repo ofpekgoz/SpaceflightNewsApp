@@ -18,16 +18,19 @@ interface ArticleDao {
 
     @Query("SELECT * FROM SpaceflightNews")
     suspend fun getArticleList(): List<ArticleEntity>
+
     @Query("SELECT * FROM SpaceflightNews WHERE id = :id")
     suspend fun getArticleById(id: Int): ArticleEntity?
 
     @Query("SELECT * FROM FavoriteArticle")
     suspend fun getFavoriteArticleList(): List<FavoriteArticle>
 
-    @Insert
+    @Query("SELECT * FROM FavoriteArticle WHERE id = :id LIMIT 1")
+    fun isArticleInFavorites(id: Int): FavoriteArticle?
+
+    @Upsert
     suspend fun insertFavoriteArticle(favoriteArticle: FavoriteArticle)
 
     @Query("DELETE FROM FavoriteArticle WHERE id = :id")
-    suspend fun deleteFavoriteArticle(id:Int)
-
+    fun deleteFavoriteArticle(id: Int)
 }

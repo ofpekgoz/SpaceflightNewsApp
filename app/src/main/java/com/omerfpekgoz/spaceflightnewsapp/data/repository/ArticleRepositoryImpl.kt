@@ -1,6 +1,5 @@
 package com.omerfpekgoz.spaceflightnewsapp.data.repository
 
-import android.util.Log
 import com.omerfpekgoz.spaceflightnewsapp.data.data_source.local.dao.ArticleDao
 import com.omerfpekgoz.spaceflightnewsapp.data.data_source.remote.ArticleAPI
 import com.omerfpekgoz.spaceflightnewsapp.data.model.toArticleEntity
@@ -36,16 +35,13 @@ class ArticleRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getArticleById(id: Int, forceFetchFromRemote: Boolean): ArticleEntity? {
-        Log.e("ARTICLE", "Repository 1 $id")
         val localArticle = articleDao.getArticleById(id)
-        Log.e("ARTICLE", "Repository $localArticle")
         localArticle?.let {
             val shouldLocalArticle = !forceFetchFromRemote
             if (shouldLocalArticle) return localArticle
         }
         return try {
             val getArticle = articleAPI.getArticleById(id).toArticleEntity()
-            Log.e("ARTICLE", "Repository API $localArticle")
             getArticle
         } catch (e: Exception) {
             e.printStackTrace()
@@ -58,10 +54,14 @@ class ArticleRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertFavoriteArticle(favoriteArticle: FavoriteArticle) {
-        articleDao.insertFavoriteArticle(favoriteArticle)
+        return articleDao.insertFavoriteArticle(favoriteArticle)
     }
 
-    override suspend fun deleteFavoriteArticle(id: Int) {
+    override fun deleteFavoriteArticle(id: Int) {
         articleDao.deleteFavoriteArticle(id)
+    }
+
+    override suspend fun isArticleInFavorites(id: Int): FavoriteArticle? {
+        return articleDao.isArticleInFavorites(id)
     }
 }

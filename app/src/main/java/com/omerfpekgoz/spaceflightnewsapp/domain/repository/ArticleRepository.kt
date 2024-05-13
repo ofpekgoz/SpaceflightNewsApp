@@ -20,5 +20,7 @@ interface ArticleRepository {
     suspend fun getFavoriteArticleList(): List<FavoriteArticle>
     suspend fun insertFavoriteArticle(favoriteArticle: FavoriteArticle)
 
-    suspend fun deleteFavoriteArticle(id: Int)
+     fun deleteFavoriteArticle(id: Int)
+
+    suspend fun isArticleInFavorites(id: Int): FavoriteArticle?
 }

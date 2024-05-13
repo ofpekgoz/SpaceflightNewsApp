@@ -9,7 +9,7 @@ import javax.inject.Inject
 class DeleteArticleUseCase @Inject constructor(
     private val articleRepository: ArticleRepository
 ) {
-    suspend fun deleteFavoriteArticle(id: Int) {
+     fun deleteFavoriteArticle(id: Int) {
         articleRepository.deleteFavoriteArticle(id)
     }
 }

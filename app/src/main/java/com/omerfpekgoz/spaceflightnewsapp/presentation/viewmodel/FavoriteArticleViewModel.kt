@@ -27,6 +27,9 @@ class FavoriteArticleViewModel @Inject constructor(
     private var _favoriteArticleState = MutableLiveData<Resource<*>>()
     val favoriteArticleState = _favoriteArticleState
 
+    private var _insertFavoriteArticleState = MutableLiveData<Resource<*>>()
+    val insertFavoriteArticleState = _insertFavoriteArticleState
+
 
     init {
         getFavoriteArticleList()
@@ -54,10 +57,30 @@ class FavoriteArticleViewModel @Inject constructor(
 
 
     suspend fun insertFavoriteArticle(favoriteArticle: FavoriteArticle) {
-        insertArticleUseCase.insertFavoriteArticle(favoriteArticle)
+        viewModelScope.launch {
+            insertArticleUseCase.insertFavoriteArticle(favoriteArticle).onEach {
+                when (it) {
+                    is Resource.Loading -> {
+                        _insertFavoriteArticleState.value = Resource.Loading
+                    }
+
+                    is Resource.Success -> {
+                        _insertFavoriteArticleState.value = Resource.Success(it.data)
+                    }
+
+                    is Resource.Error -> {
+                        _insertFavoriteArticleState.value = Resource.Error(it.message)
+                    }
+                }
+            }.launchIn(viewModelScope)
+        }
     }
 
-    suspend fun deleteFavoriteArticle(id: Int) {
+    suspend fun isArticleInFavorites(id: Int): FavoriteArticle? {
+        return getArticleUseCase.isArticleInFavorites(id)
+    }
+
+     fun deleteFavoriteArticle(id: Int) {
         deleteArticleUseCase.deleteFavoriteArticle(id)
     }
 }
